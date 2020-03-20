@@ -1,0 +1,28 @@
+#设置thymeleaf模板
+spring:
+  thymeleaf:
+    mode: HTML
+    cache: false
+
+  #数据库连接
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/blog?&useSSL=false&serverTimezone=UTC
+    username: root
+    password: 123456
+
+  #JPA
+  jpa:
+   hibernate:
+    ddl-auto: update
+   show-sql: true
+#基本日志配置
+logging:
+  level:
+    root: info
+    com.imcoding: debug
+  file:
+    name: log/imcoding.log
+
+#全体普通用户默认头像
+comment.avatar: /img/avator.jpg

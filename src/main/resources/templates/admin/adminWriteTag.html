@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragment :: head(~{::title})">
+    <title>新增标签</title>
+</head>
+<script>
+    $(function () {
+        $('.ui.form').form({
+            fields : {
+                title : {
+                    identifier: 'name',
+                    rules: [{
+                        type : 'empty',
+                        prompt: '请输入标签名称'
+                    }]
+                }
+            }
+        });
+    });
+</script>
+<body>
+
+<!--导航-->
+<!--导航-->
+<nav th:replace="adminFragment :: adminNav(3)"></nav>
+<div class="ui attached pointing menu">
+    <div class="ui container">
+        <div class="left menu">
+            <a href="#" th:href="@{/tag/toAddTag}" class="active teal item " >新增</a>
+            <a href="#" th:href="@{/tag/adminTag}" class="teal item">列表</a>
+        </div>
+    </div>
+</div>
+
+<div  class="m-container-small m-padded-tb-big">
+    <div class="ui container">
+        <form action="#" method="post"  th:object="${tag}" th:action="*{id}==null ? @{/tag/addTag} : @{/tag/updateTag/{id}(id=*{id})} "  class="ui form">
+            <input type="hidden" name="id" th:value="*{id}">
+            <div class=" field">
+                <div class="ui left labeled input">
+                    <label class="ui teal basic label">名称</label>
+                    <input type="text" name="name" placeholder="分类名称" th:value="*{name}" >
+                </div>
+            </div>
+
+            <div class="ui error message"></div>
+            <div class="ui negative message" th:if="${#fields.hasErrors('name')}"  >
+              <i class="close icon"></i>
+              <div class="header">验证失败</div>
+              <p th:errors="*{name}">提交信息不符合规则</p>
+            </div>
+
+            <div class="ui right aligned container">
+                <button type="button" class="ui button" ><a style="color: #0F192A" th:href="@{/tag/adminTag}">返回</a></button>
+                <button class="ui teal submit button">提交</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+
+
+                    <!--底部-->
+                    <!--vertical 垂直-->
+<footer th:replace="fragment :: footer"></footer>
+
+
+</body>
+</html>

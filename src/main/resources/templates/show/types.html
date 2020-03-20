@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragment :: head(~{::title})">
+    <title>分类</title>
+</head>
+<body>
+
+<!--导航-->
+<nav th:replace="fragment:: nav(2)"></nav>
+
+<!--主体-->
+<!--container自适应设备尺寸		-->
+<div  class="m-padded-tb-big m-container-small animated fadeIn">
+    <div class="ui container">
+        <!--header-->
+        <div class="ui top attached segment">
+            <div class="ui middle aligned two column grid">
+                <div class="column">
+                    <h3 class="ui orange header">分类</h3>
+                </div>
+                <div class="right aligned column">
+                    共 <h2 class="ui orange header m-inline-block m-text-thin" th:text="${#arrays.length(types)}"> 14 </h2> 个
+                </div>
+            </div>
+        </div>
+
+        <!--标签-->
+        <div class="ui attached segment m-padded-tb-large">
+            <div class="ui labeled button m-margin-tb-tiny" th:each="type : ${types}">
+                <a href="#" th:href="@{/types/{id}(id=${type.id})}" class="ui basic button" th:classappend="${type.id==activeTypeId} ? 'blue'" th:text="${type.name}">标签名</a>
+                <div class="ui basic  left pointing label" th:classappend="${type.id==activeTypeId} ? 'blue'" th:text="${#arrays.length(type.blogs)}">24</div>
+            </div>
+        </div>
+        <!--内容-->
+        <div class="ui top attached teal segment">
+            <div class="ui padded vertical segment m-padded-tb-large" th:each="blog : ${page.content}">
+                <div class="ui middle aligned mobile reversed stackable grid" >
+                    <div class="eleven wide column">
+                        <h3 class="ui header" ><a href="#" th:href="@{/readBlog/{id}(id=${blog.id})}" target="_blank" class="m-black" th:text="${blog.title}">标题?</a></h3>
+                        <p class="m-text" th:text="${blog.description}">描述</p>
+                        <div class="ui grid">
+                            <div class="eleven wide column">
+                                <div class="ui mini horizontal link list">
+                                    <div class="item">
+                                        <img src="https://unsplash.it/100/100?image=1005" th:src="@{${blog.user.avatar}}"  alt="" class="ui avatar image">
+                                        <div class="content"><a href="#" class="header" th:text="${blog.user.nickName}" ></a></div>
+                                    </div>
+                                    <div class="item">
+                                        <i class="calendar icon"></i><span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">时间</span>
+                                    </div>
+<!--                                    <div class="item">-->
+<!--                                        <i class="eye icon"></i> <span th:text="${blog.views}">阅读量</span>-->
+<!--                                    </div>-->
+                                </div>
+                            </div>
+                            <div class="right aligned five wide column">
+                                <a href="#" target="_blank" class="ui blue basic label m-padded-tiny m-text-thin" th:text="${blog.type.name}">分类名称</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="five wide column">
+                        <a href="#" th:href="@{/readBlog/{id}(id=${blog.id})}" target="_blank">
+                            <img src="https://unsplash.it/800/450?image=1005" th:src="@{${blog.firstPicture}}"  alt="" class="ui rounded image">
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+<!--        分页-->
+
+            <!--分页组件-->
+            <div class="ui attached center aligned segment">
+                <div class="ui pagination stackable menu">
+                    <a class="item" th:unless="${page.first}"
+                       th:href="@{'/types/'+${activeTypeId}}">
+                        首页
+                    </a>
+                    <a class="item" th:unless="${page.first}"
+                       th:href="@{'/types/'+${activeTypeId}(page=${page.number}-1)}">
+                        上一页
+                    </a>
+                    <a class="item">
+                        第<h3 class="ui orange header m-inline-block m-text-thin"
+                             th:text="${page.number}+1">8</h3>页
+                    </a>
+                    <a class="item" th:unless="${page.last}"
+                       th:href="@{'/types/'+${activeTypeId}(page=${page.number}+1)}">
+                        下一页
+                    </a>
+                    <a class="item"  th:unless="${page.last}"
+                       th:href="@{'/types/'+${activeTypeId}(page=${page.totalPages}-1)}">
+                        尾页
+                    </a>
+                    <a class="item">
+                        共<h3 class="ui red header m-inline-block m-text-thin"
+                             th:text="${page.totalPages}">8</h3>页
+                    </a>
+                    <a class="item">
+                        共<h3 class="ui red header m-inline-block m-text-thin"
+                             th:text="${page.totalElements}">8</h3>条
+                    </a>
+                    <form name="page" class="right item" action="#" th:action="@{/typePage/{id}(id=${activeTypeId})}"
+                          method="get">
+                        <div class="ui right labeled input">
+                            <div class="ui basic label">Go</div>
+                            <input type="number" name="page" placeholder="页码..."
+                                   style="width: 80px;">
+                            <div class="ui basic label">页</div>
+                            <button class="ui icon button"><i onclick="document.forms['page'].submit()"
+                                                              class="right arrow icon"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+    </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+
+                    <!--底部-->
+                    <!--vertical 垂直-->
+<footer th:replace="fragment :: footer"></footer>
+
+ </body>
+</html>

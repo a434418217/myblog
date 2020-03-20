@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<!--管理页导航-->
+<div th:fragment="adminNav(x)">
+    <nav class="ui inverted attached segment m-padded-tb-mini m-shadow-small" >
+        <div class="ui container">
+            <div class="ui inverted secondary stackable menu">
+                <h2 class="ui header item"><a class="ui m-teal" th:href="@{/blog/blogs}">管理后台</a></h2>
+                <a href="#" th:href="@{/blog/blogs}" class="m-item item m-mobile-hide" th:classappend="${x ==1} ? 'active'"><i class="mini home icon"></i>博客</a>
+                <a href="#" th:href="@{/type/adminType}" class="m-item item m-mobile-hide" th:classappend="${x ==2} ? 'active'"><i class="mini idea icon"></i>分类</a>
+                <a href="#" th:href="@{/tag/adminTag}" class="m-item item m-mobile-hide" th:classappend="${x ==3} ? 'active'"><i class="mini tags icon"></i>标签</a>
+                <div class="right m-item m-mobile-hide menu">
+                    <div class="ui dropdown  item">
+                        <div class="text">
+                            <img class="ui avatar image"th:src="@{${session.user.avatar}}">
+                            <span th:text="${session.user.nickName}"></span>
+                        </div>
+                        <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <a href="#" class="item" th:href="@{/admin/loginOut}">注销</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+            <i class="sidebar icon"></i>
+        </a>
+    </nav>
+
+</div>
+<div th:fragment="adminType(n)" class="ui attached pointing menu">
+    <div class="ui container">
+        <div class="left menu">
+            <a href="#" class="teal item" th:classappend="${n ==1} ? 'active'">发布</a>
+            <a href="#" class="teal item" th:classappend="${n ==2} ? 'active'">列表</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

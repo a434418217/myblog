@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:fragment="head(title)">
+    <meta charset="utf-8"/>
+    <!--移动端的设置-->
+    <meta content="width=device-width,initial-scale=1.0" name="viewport"/>
+    <title th:replace="${title}"></title>
+    <link href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/animate.css" th:href="@{/css/animate.css}">
+    <!--    自定义css-->
+    <link href="../static/css/index.css" rel="stylesheet" th:href="@{/css/index.css}">
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<!--    不蒜子统计-->
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <!--                    引入自定义js-->
+    <script src="../static/js/public.js" th:src="@{/js/public.js}"></script>
+
+
+</head>
+
+<body>
+
+<!--主页导航-->
+<nav id="nav" th:fragment="nav(n)" class="ui inverted attached segment m-nav-padding m-shadow-small">
+    <div class="ui container">
+        <div class="ui inverted secondary menu stackable">
+            <h2 class="ui header item"><a class="ui m-teal" th:href="@{/}">Blog</a></h2>
+            <a href="#" th:href="@{/}" class="item m-item m-mobile-hide" th:classappend="${n ==1} ? 'active'"><i class="home icon"></i>首页</a>
+            <a href="#" th:href="@{/types/-1}" class="item m-item m-mobile-hide" th:classappend="${n ==2} ? 'active'"><i class="idea icon"></i>分类</a>
+            <a href="#" th:href="@{/tags/-1}" class="item m-item m-mobile-hide" th:classappend="${n ==3} ? 'active'"><i class="tags icon"></i>标签</a>
+            <a href="#" th:href="@{/history}" class="item m-item m-mobile-hide" th:classappend="${n ==4} ? 'active'"><i class="calendar alternate icon"></i>历史文章</a>
+            <a href="#" th:href="@{/message}" class="item m-item m-mobile-hide" th:classappend="${n ==5} ? 'active'"><i class="paper plane icon"></i>留言</a>
+            <!--搜索框靠右-->
+            <div class="right item m-item m-mobile-hide">
+                <form action="#" method="post" name="search" target="_blank" th:action="@{/search}">
+                    <div class="ui icon inverted input m-margin-tb-tiny">
+                        <input type="text" name="query" id="search" placeholder="搜索博客" th:value="${query}" />
+<!--                        这是i标签，不会提交表单内容，设置点击事件提交-->
+                        <i onclick="document.forms['search'].submit()" class="search link icon"></i>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--    手机端的汉堡按钮-->
+    <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+
+
+<!--底部-->
+<!--vertical 垂直-->
+<footer  th:fragment="footer" class="ui inverted vertical segment m-footer-padding">
+
+    <div class="ui center aligned container">
+        <div class="ui inverted divided stackable grid  middle aligned">
+        <div class="three wide column">
+            <div class="ui inverted link list">
+                <div class="item">
+                    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+                </div>
+            </div>
+        </div>
+        <div class="three wide column">
+            <div class="ui inverted link list">
+                <div class="item">
+                    本站访客数<span id="busuanzi_value_site_uv"></span>人次
+                </div>
+            </div>
+        </div>
+        <div class="four wide column">
+            <div class="ui inverted link list">
+                <div class="item">
+                    <span id="htmer_time"></span>
+                </div>
+            </div>
+        </div>
+        <div class="six wide column">
+            <div class="ui inverted link list">
+                <div class="item">
+                    <p class="m-text-thin m-text-spaced m-opacity-mini m-green">Copyright © 2019 - 2020 Chen Designed by Chen</p>
+                </div>
+            </div>
+        </div>
+
+
+</div>
+
+    </div>
+</footer>
+
+
+</body>
+</html>

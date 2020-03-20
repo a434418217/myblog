@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragment :: head(~{::title})">
+    <title>留言</title>
+</head>
+<body>
+<!--导航-->
+<nav th:replace="fragment:: nav(5)"></nav>
+
+<!--主体-->
+<div id="content" class="m-padded-tb-big m-container-small animated fadeIn">
+<div  class="ui bottom attached segment">
+    <!--留言区域列表-->
+    <div id="comment-container"  class="ui teal segment">
+        <div th:fragment="commentList">
+            <div class="ui threaded comments" style="max-width: 100%;">
+                <h3 class="ui dividing header">公共留言区</h3>
+                <div class="comment" th:each="comment : ${messages}">
+                    <a class="avatar">
+                        <img src="https://unsplash.it/100/100?image=1005" th:src="@{${comment.avatar}}">
+                    </a>
+                    <div class="content">
+                        <a class="author" >
+                            <span th:text="${comment.nickName}">Matt</span>
+                            <div class="ui mini basic red left pointing label m-padded-mini" th:if="${comment.adminComment}">博主</div>
+                        </a>
+                        <div class="metadata">
+                            <span class="date" th:text="${#dates.format(comment.createTime,'yyyy-MM-dd HH:mm')}">Today at 5:42PM</span>
+                        </div>
+                        <div class="text" th:text="${comment.content}">
+                            How artistic!
+                        </div>
+                        <div class="actions">
+                            <a th:if="${session.user != null}" th:href="@{/del/{id}(id=${comment.id})}">删除</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="comment-form" class="ui form">
+        <input type="hidden" name="parentComment.id" value="-1">
+        <div class="field">
+            <textarea name="content" placeholder="请输入留言信息..."></textarea>
+        </div>
+        <div class="fields">
+            <div class="field m-mobile-wide m-margin-bottom-small">
+                <div class="ui left icon input">
+                    <i class="user icon"></i>
+                    <input type="text" name="nickName" placeholder="姓名" th:value="${session.user}!=null ? ${session.user.nickName}">
+                </div>
+            </div>
+            <div class="field m-mobile-wide m-margin-bottom-small">
+                <div class="ui left icon input">
+                    <i class="mail icon"></i>
+                    <input type="text" name="email" placeholder="邮箱" th:value="${session.user}!=null ? ${session.user.email}">
+                </div>
+            </div>
+            <div class="field  m-margin-bottom-small m-mobile-wide">
+                <button id="commentpost-btn" type="button" class="ui teal button m-mobile-wide"><i class="edit icon"></i>发布</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<footer th:replace="fragment :: footer"></footer>
+
+
+<script th:inline="javascript">
+
+    //评论表单验证
+    $('.ui.form').form({
+        fields: {
+            title: {
+                identifier: 'content',
+                rules: [{
+                    type: 'empty',
+                    prompt: '请输入评论内容'
+                }
+                ]
+            },
+            content: {
+                identifier: 'nickName',
+                rules: [{
+                    type: 'empty',
+                    prompt: '请输入你的大名'
+                }]
+            },
+            type: {
+                identifier: 'email',
+                rules: [{
+                    type: 'email',
+                    prompt: '请填写正确的邮箱地址'
+                }]
+            }
+        }
+    });
+
+    $('#commentpost-btn').click(function () {
+        var boo = $('.ui.form').form('validate form');
+        if (boo) {
+            console.log('校验成功');
+            postData();
+        } else {
+            console.log('校验失败');
+        }
+
+    });
+
+    function postData() {
+        $("#comment-container").load(/*[[@{/messages}]]*/"",{
+            "parentComment.id" : $("[name='parentComment.id']").val(),
+            "nickName": $("[name='nickName']").val(),
+            "email"   : $("[name='email']").val(),
+            "content" : $("[name='content']").val()
+        },function (responseTxt, statusTxt, xhr) {
+//        $(window).scrollTo($('#comment-container'),500);
+            clearContent();
+        });
+    }
+
+    function clearContent() {
+        $("[name='content']").val('');
+        $("[name='parentComment.id']").val(-1);
+        $("[name='content']").attr("placeholder", "请输入留言信息...");
+    }
+
+
+</script>
+
+</body>
+</html>

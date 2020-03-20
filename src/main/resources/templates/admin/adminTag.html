@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragment :: head(~{::title})">
+    <title>标签管理</title>
+</head>
+
+<body>
+
+<!--导航-->
+<nav th:replace="adminFragment :: adminNav(3)"></nav>
+<div class="ui attached pointing menu">
+    <div class="ui container">
+        <div class="left menu">
+            <a href="#" th:href="@{/tag/toAddTag}" class="teal item " >新增</a>
+            <a href="#" th:href="@{/tag/adminTag}" class="active teal item">列表</a>
+        </div>
+    </div>
+</div>
+
+
+
+<!--主体-->
+<!--container自适应设备尺寸		-->
+<div  class="m-container-small m-padded-tb-big">
+    <div class="ui container">
+        <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+            <i class="close icon"></i>
+            <div class="header">提示：</div>
+            <p th:text="${message}">恭喜，操作成功！</p>
+        </div>
+        <table class="ui celled table">
+            <thead>
+            <tr>
+                <th></th>
+                <th>名称</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="tag,iterStat : ${page.content}">
+                <td th:text="${iterStat.count}">总数</td>
+                <td th:text="${tag.name}">标签名称</td>
+                <td>
+                    <a href="#" th:href="@{/tag/toUpdateTag/{id}(id=${tag.id})}" class="ui mini teal basic button">编辑</a>
+                    <a href="#" th:href="@{/tag/del/{id}(id=${tag.id})}" class="ui mini red basic button">删除</a>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <th colspan="6" >
+                    <div class="ui mini pagination menu" th:if="${page.totalPages}>1">
+                        <a th:href="@{/tag/adminTag(page=${page.number}-1)}" class="  item" th:unless="${page.first}">上一页</a>
+                        <a th:href="@{/tag/adminTag(page=${page.number}+1)}" class=" item" th:unless="${page.last}">下一页</a>
+                    </div>
+                    <a href="#" th:href="@{/tag/toAddTag}"  class="ui mini right floated teal basic button">新增</a>
+                </th>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+                    <!--底部-->
+                    <!--vertical 垂直-->
+<footer th:replace="fragment :: footer"></footer>
+
+</body>
+</html>
