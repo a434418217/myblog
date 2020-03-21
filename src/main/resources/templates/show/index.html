@@ -79,7 +79,7 @@
                                 上一页
                             </a>
                             <a class="item">
-                                第<h3 class="ui orange header m-inline-block m-text-thin"
+                                第<h3 class="ui blue header m-inline-block m-text-thin"
                                      th:text="${page.number}+1">8</h3>页
                             </a>
                             <a class="item" th:unless="${page.last}"
@@ -91,24 +91,25 @@
                                 尾页
                             </a>
                             <a class="item">
-                                共<h3 class="ui red header m-inline-block m-text-thin"
+                                共<h3 class="ui blue header m-inline-block m-text-thin"
                                      th:text="${page.totalPages}">8</h3>页
                             </a>
                             <a class="item">
-                                共<h3 class="ui red header m-inline-block m-text-thin"
+                                共<h3 class="ui blue header m-inline-block m-text-thin"
                                      th:text="${page.totalElements}">8</h3>条
                             </a>
                             <form name="page" class="right item" action="#" th:action="@{/page}"
                                   method="get">
                                 <div class="ui right labeled input">
                                     <div class="ui basic label">Go</div>
-                                    <input type="number" name="page" placeholder="页码..."
+                                    <input type="number" name="page" placeholder="页码"
                                            style="width: 80px;">
                                     <div class="ui basic label">页</div>
                                     <button class="ui icon button"><i onclick="document.forms['page'].submit()"
                                                                       class="right arrow icon"></i></button>
                                 </div>
                             </form>
+
                         </div>
                     </div>
                 </div>
@@ -171,6 +172,10 @@
                 </div>
 
                 <!--二维码-->
+                <h3 class="ui horizontal divider header">扫码关注我</h3>
+                <div class="ui centered card" style="width: 11em">
+                    <img src="../static/images/wechat.jpg" th:src="@{/img/wechat.jpg}" alt="" class="ui rounded image" >
+                </div>
                 <h3 class="ui horizontal divider header">关于</h3>
                 <div class="ui attached segment">
                     <p class="m-text">陈某人，一个独立开发者，折腾在 0 和 1 世界的大叔；一个终身学习者，誓将学习无限循环. 希望结识可以共同成长的小伙伴.</p>

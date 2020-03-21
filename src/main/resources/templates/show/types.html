@@ -83,7 +83,7 @@
                         上一页
                     </a>
                     <a class="item">
-                        第<h3 class="ui orange header m-inline-block m-text-thin"
+                        第<h3 class="ui blue header m-inline-block m-text-thin"
                              th:text="${page.number}+1">8</h3>页
                     </a>
                     <a class="item" th:unless="${page.last}"
@@ -95,11 +95,11 @@
                         尾页
                     </a>
                     <a class="item">
-                        共<h3 class="ui red header m-inline-block m-text-thin"
+                        共<h3 class="ui blue header m-inline-block m-text-thin"
                              th:text="${page.totalPages}">8</h3>页
                     </a>
                     <a class="item">
-                        共<h3 class="ui red header m-inline-block m-text-thin"
+                        共<h3 class="ui blue header m-inline-block m-text-thin"
                              th:text="${page.totalElements}">8</h3>条
                     </a>
                     <form name="page" class="right item" action="#" th:action="@{/typePage/{id}(id=${activeTypeId})}"
